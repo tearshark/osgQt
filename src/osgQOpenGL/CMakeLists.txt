@@ -50,6 +50,7 @@ IF ( Qt5Widgets_FOUND )
     )
 
     SETUP_LIBRARY(${LIB_NAME})
+    set_target_properties(${LIB_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN/")
 
     generate_export_header(${LIB_NAME} EXPORT_FILE_NAME "Export")
 

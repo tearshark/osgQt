@@ -21,6 +21,7 @@ ELSE()
     SET ( EXAMPLE_NAME osgQtWidgets )
 ENDIF()
 SETUP_EXAMPLE(${EXAMPLE_NAME})
+set_target_properties(example_${EXAMPLE_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN/")
 
 IF ( Qt5Widgets_FOUND )
     qt5_use_modules( example_${EXAMPLE_NAME} OpenGL WebKitWidgets )

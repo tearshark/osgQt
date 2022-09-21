@@ -20,6 +20,7 @@ SETUP_EXAMPLE( ${EXAMPLE_NAME} )
 SET(TARGET_LIBRARIES Qt5::Widgets Qt5::OpenGL)
 
 target_link_libraries(example_${EXAMPLE_NAME} osgQOpenGL)
+set_target_properties(example_${EXAMPLE_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN/")
 
 qt5_use_modules( example_${EXAMPLE_NAME} Widgets OpenGL )
 
