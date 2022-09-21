@@ -92,7 +92,12 @@ ENDIF()
 
 PROJECT(osgQt)
 
-FIND_PACKAGE(OpenSceneGraph 3.6.0 REQUIRED osgDB osgGA osgUtil osgText osgViewer osgWidget)
+#FIND_PACKAGE(OpenSceneGraph 3.6.0 REQUIRED osgDB osgGA osgUtil osgText osgViewer osgWidget)
+
+set(OpenSceneGraph_DEBUG "YES")
+string(REPLACE "\\" "/"  OSG_PUBLISH_ROOT "$ENV{OSG_PUBLISH_ROOT}")
+message(STATUS "OSG_PUBLISH_ROOT=${OSG_PUBLISH_ROOT}")
+find_package(osgPublish REQUIRED HINTS ${OSG_PUBLISH_ROOT})
 SET(OPENSCENEGRAPH_SOVERSION 145)
 
 SET(OSG_PLUGINS osgPlugins-${OPENSCENEGRAPH_VERSION})
@@ -590,7 +595,7 @@ ELSEIF(MSVC)
         #C4100 'identifier' : unreferenced formal parameter
         #C4127 Error Message conditional expression is constant
         #C4706 assignment within conditional expression
-        SET(OSG_AGGRESSIVE_WARNING_FLAGS /W4 /wd4706 /wd4127 /wd4100)
+        SET(OSG_AGGRESSIVE_WARNING_FLAGS /wd4706 /wd4127 /wd4100)
 ELSEIF(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         SET(OSG_AGGRESSIVE_WARNING_FLAGS  -Wall -Wparentheses -Wno-long-long -Wno-import -pedantic -Wreturn-type -Wmissing-braces -Wunknown-pragmas -Wunused -Wno-overloaded-virtual)
 
