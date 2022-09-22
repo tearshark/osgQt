@@ -1,5 +1,4 @@
-#ifndef OSGQOPENGLWINDOW_H
-#define OSGQOPENGLWINDOW_H
+#pragma once
 
 #ifdef __APPLE__
 #   define __glext_h_
@@ -34,14 +33,14 @@ class OSGQOPENGL_EXPORT osgQOpenGLWindow : public QOpenGLWindow,
     Q_OBJECT
 
 protected:
-    OSGRenderer* m_renderer {nullptr};
-    bool _osgWantsToRenderFrame{true};
+    OSGRenderer* m_renderer{ nullptr };
+    bool _osgWantsToRenderFrame{ true };
     OpenThreads::ReadWriteMutex _osgMutex;
-	bool _isFirstFrame {true};
+    bool _isFirstFrame{ true };
+
     friend class OSGRenderer;
 
     QWidget* _widget = nullptr;
-
 public:
     osgQOpenGLWindow(QWidget* parent = nullptr);
     virtual ~osgQOpenGLWindow();
@@ -84,4 +83,3 @@ protected:
     void createRenderer();
 };
 
-#endif // OSGQOPENGLWINDOW_H

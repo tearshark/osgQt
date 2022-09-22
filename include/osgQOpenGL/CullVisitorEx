@@ -1,5 +1,4 @@
-#ifndef CULLVISITOREX_H
-#define CULLVISITOREX_H
+#pragma once
 
 #include <osgQOpenGL/Export>
 
@@ -22,5 +21,3 @@ public:
 
     virtual void apply(osg::Camera& camera);
 };
-
-#endif // CULLVISITOREX_H

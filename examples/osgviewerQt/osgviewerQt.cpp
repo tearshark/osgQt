@@ -41,8 +41,6 @@
 
 int main( int argc, char** argv )
 {
-
-
     QSurfaceFormat format = QSurfaceFormat::defaultFormat();
 
 #ifdef OSG_GL3_AVAILABLE
@@ -232,5 +230,4 @@ int main( int argc, char** argv )
     widget.show();
 
     return app.exec();
-
 }

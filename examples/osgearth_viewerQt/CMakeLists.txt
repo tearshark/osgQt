@@ -1,0 +1,25 @@
+SET( TARGET_SRC
+    osgearth_viewerQt.cpp
+)
+
+SET(TARGET_LIBRARIES_VARS
+    OSG_LIBRARY
+    OSGMATH_LIBRARY
+    OSGUTIL_LIBRARY
+    OSGVIEWER_LIBRARY
+    OSGGA_LIBRARY
+    OSGDB_LIBRARY
+    OPENTHREADS_LIBRARY
+)
+
+
+SET (EXAMPLE_NAME osgearth_viewerQt )
+
+SETUP_EXAMPLE( ${EXAMPLE_NAME} )
+
+SET(TARGET_LIBRARIES Qt5::Widgets Qt5::OpenGL)
+
+target_link_libraries(example_${EXAMPLE_NAME} osgQOpenGL ${OSGEARTH_LIBRARIES})
+set_target_properties(example_${EXAMPLE_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN/")
+
+qt5_use_modules( example_${EXAMPLE_NAME} Widgets OpenGL )

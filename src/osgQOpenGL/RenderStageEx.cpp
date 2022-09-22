@@ -4,7 +4,7 @@
 void RenderStageEx::drawInner(osg::RenderInfo& renderInfo,
                               osgUtil::RenderLeaf*& previous, bool& doCopyTexture)
 {
-#if 0
+#if 1
     // **************************************************************
     // Code from RenderStage class
     struct SubFunc

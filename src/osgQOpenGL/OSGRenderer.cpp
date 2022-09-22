@@ -19,8 +19,8 @@
 #include <osgQOpenGL/osgQOpenGLWindow>
 #include <osgQOpenGL/osgQOpenGLWidget>
 
-//#include <osgQOpenGL/CullVisitorEx>
-//#include <osgQOpenGL/GraphicsWindowEx>
+#include <osgQOpenGL/CullVisitorEx>
+#include <osgQOpenGL/GraphicsWindowEx>
 
 #include <QApplication>
 #include <QScreen>
@@ -463,31 +463,29 @@ void OSGRenderer::frame(double simulationTime)
     _lastFrameStartTime.setStartTick();
     // make frame
 
-#if 1
+#if 0
     osgViewer::Viewer::frame(simulationTime);
 #else
-
-    if(_done) return;
+    if (_done) return;
 
     // OSG_NOTICE<<std::endl<<"CompositeViewer::frame()"<<std::endl<<std::endl;
 
-    if(_firstFrame)
+    if (_firstFrame)
     {
         viewerInit();
 
-        if(!isRealized())
+        if (!isRealized())
         {
             realize();
         }
 
         _firstFrame = false;
     }
-
     advance(simulationTime);
 
     eventTraversal();
     updateTraversal();
-    //    renderingTraversals();
+    renderingTraversals();
 #endif
 }
 
