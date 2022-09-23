@@ -26,9 +26,13 @@
 
 #include <osgGA/Device>
 
+#ifdef _WIN32
 #define EARTH_FILE "E:/AtomSpace/xwd/xwd/GisData/Earth.earth"
-//#define EARTH_FILE "E:/Local/Earth.earth"
 #define MOON_IMAGE_FILE "E:/AtomData/AtomSpace/xwd/xwd/resources/Images/moon_1024x512.jpg"
+#else
+#define EARTH_FILE "/home/shark/dev/gisdata/Earth.earth"
+#define MOON_IMAGE_FILE "/home/shark/dev/gisdata/Images/moon_1024x512.jpg"
+#endif
 
 #define LC "test_EarthSingleView"
 
@@ -153,7 +157,7 @@ namespace
     std::pair<osg::ref_ptr<osg::Group>, osg::ref_ptr<osgEarth::MapNode>>
         createMapNode(const char* filePath)
     {
-#if 1
+#if 0
         osgEarth::URI uri(filePath);
         osgEarth::ReadResult r = uri.readNode();
         if (!r.succeeded())
@@ -164,7 +168,7 @@ namespace
         osg::ref_ptr<osgEarth::MapNode> mapNode = r.release<osgEarth::MapNode>();
 #else
         char* argv[] = { nullptr, const_cast<char*>(filePath), nullptr };
-        int argc = _countof(argv) - 1;
+        int argc = sizeof(argv) / sizeof(argv[0]) - 1;
         osg::ArgumentParser args(&argc, argv);
 
         // read in the Earth file:
@@ -266,10 +270,11 @@ int main(int argc, char** argv)
                 char filePath[] = EARTH_FILE;
                 char skyOpt[] = "--sky";
                 char* argv[] = { nullptr, filePath, skyOpt, nullptr };
-                int argc = _countof(argv) - 1;
+                int argc = sizeof(argv) / sizeof(argv[0]) - 1;
                 osg::ArgumentParser arguments(&argc, argv);
 
-                osg::Group* node = osgEarth::Util::MapNodeHelper().loadWithoutControls(arguments, widget.getOsgViewer());
+                auto* viewer = widget.getOsgViewer();
+                osg::Group* node = osgEarth::Util::MapNodeHelper().loadWithoutControls(arguments, viewer);
                 if (node != nullptr)
                 {
                     node->removeChildren(1, node->getNumChildren());
